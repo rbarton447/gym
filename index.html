@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#060e16" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Cheat Sheet" />
+<title>Gym Cheat Sheet · Ross</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #060e16;
+    --bg-card: #0d1f2d;
+    --bg-card-2: #0a1520;
+    --line: #1e3a5f;
+    --line-soft: rgba(30, 58, 95, 0.4);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #64748b;
+    --faint: #475569;
+    --cyan: #38bdf8;
+    --orange: #f97316;
+    --green: #22c55e;
+    --purple: #a855f7;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(ellipse at 20% 0%, #0d2137 0%, #060e16 60%);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 20px 16px 32px;
+    line-height: 1.4;
+  }
+  ::-webkit-scrollbar { width: 4px; background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+  /* HEADER */
+  .header { margin-bottom: 22px; }
+  .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    color: var(--cyan);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  h1 {
+    margin: 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    background: linear-gradient(90deg, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sub { color: var(--faint); font-size: 12px; margin-top: 4px; }
+
+  /* QUICK REF */
+  .quick-ref {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-card-2));
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+  .quick-ref-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+  .quick-ref-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .quick-ref-text b { color: var(--text); font-weight: 700; }
+  .quick-ref-text code {
+    font-family: 'DM Mono', monospace;
+    background: rgba(56, 189, 248, 0.12);
+    color: var(--cyan);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  /* LIFT CARD */
+  .lift {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-card-2));
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .lift::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+  }
+  .lift-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .lift-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lift-tag {
+    font-size: 10px;
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+    margin-top: 4px;
+  }
+  .lift-current {
+    text-align: right;
+  }
+  .lift-current-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .lift-current-unit {
+    color: var(--dim);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .lift-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .meta-cell {
+    background: rgba(6, 14, 22, 0.5);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+  .meta-label {
+    font-size: 9px;
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+  }
+  .meta-val {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .meta-val.goal { color: var(--green); }
+
+  /* PERCENT GRID */
+  .pct-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .pct-cell {
+    background: rgba(6, 14, 22, 0.6);
+    border: 1px solid rgba(30, 58, 95, 0.5);
+    border-radius: 8px;
+    padding: 9px 6px;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .pct-cell.warmup { border-color: rgba(100, 116, 139, 0.3); }
+  .pct-cell.working {
+    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(56, 189, 248, 0.05);
+  }
+  .pct-cell.heavy {
+    border-color: rgba(249, 115, 22, 0.4);
+    background: rgba(249, 115, 22, 0.07);
+  }
+  .pct-cell.max {
+    border-color: rgba(168, 85, 247, 0.4);
+    background: rgba(168, 85, 247, 0.08);
+  }
+  .pct-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    font-weight: 500;
+  }
+  .pct-weight {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    margin-top: 3px;
+  }
+  .pct-weight-sub {
+    font-size: 9px;
+    color: var(--faint);
+    font-family: 'DM Mono', monospace;
+    margin-top: 1px;
+  }
+
+  /* WARNING BOX */
+  .warn {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .warn b { color: var(--amber); }
+
+  /* GOALS BLOCK */
+  .goals {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-card-2));
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+  .goals-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .goal-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 13px;
+  }
+  .goal-row:last-child { border-bottom: none; }
+  .goal-name { color: var(--muted); font-weight: 500; }
+  .goal-cur { font-family: 'DM Mono', monospace; color: var(--dim); font-size: 12px; }
+  .goal-arrow { color: var(--faint); }
+  .goal-target {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--green);
+  }
+
+  /* LEGEND */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+  }
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    border: 1px solid;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    color: var(--line);
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    margin-top: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* PRINT */
+  @media print {
+    body {
+      background: white;
+      color: black;
+      padding: 0.4in;
+      font-size: 10pt;
+    }
+    h1 { color: black !important; -webkit-text-fill-color: black; }
+    .lift, .quick-ref, .goals {
+      background: white !important;
+      border: 1px solid #444 !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .pct-cell { background: white !important; }
+    .pct-weight, .lift-name, .lift-current-num,
+    .meta-val, .goal-target, .goal-name, .pct-label {
+      color: black !important;
+    }
+    .footer { color: #888; }
+  }
+
+  /* DESKTOP */
+  @media (min-width: 720px) {
+    body { padding: 32px; max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 48px; }
+    .lift { padding: 22px 24px; }
+    .lift-current-num { font-size: 44px; }
+    .pct-grid { grid-template-columns: repeat(5, 1fr); }
+    .legend { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="eyebrow">Taylored Fitness · Quick Reference</div>
+    <h1>GYM CHEAT SHEET</h1>
+    <div class="sub">Ross Barton · Last updated July 15, 2026 · Round to nearest 5 lbs</div>
+  </div>
+
+  <div class="quick-ref">
+    <div class="quick-ref-title">When Kevin Says "Start at X%"</div>
+    <div class="quick-ref-text">
+      Find the lift, find the percent, lift that weight. Numbers below are <b>already calculated</b> off your live PRs and rounded to plates. Don't trust your math, trust the card.<br><br>
+      Bar = <b>45 lbs</b>. Plates per side = <code>(target − 45) ÷ 2</code>.<br>
+      Mental check: <code>Max × % ÷ 100</code> · 60% of 235 = 141 → use 140.
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="border-color: rgba(100,116,139,0.5); background: rgba(6,14,22,0.6);"></div>Warm-up (50–60%)</div>
+    <div class="legend-item"><div class="legend-swatch" style="border-color: rgba(56,189,248,0.4); background: rgba(56,189,248,0.05);"></div>Working (65–75%)</div>
+    <div class="legend-item"><div class="legend-swatch" style="border-color: rgba(249,115,22,0.4); background: rgba(249,115,22,0.07);"></div>Heavy (80–90%)</div>
+    <div class="legend-item"><div class="legend-swatch" style="border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.08);"></div>Max (95%+)</div>
+  </div>
+
+  <div class="lift" style="--accent: #f97316;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #f97316;">Back Squat</div>
+        <div class="lift-tag">PR · 235×1 · Jun 11, 2026</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">235</div>
+        <div class="lift-current-unit">lbs · current max</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">155 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">275 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">120</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">140</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">155</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">165</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">175</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">190</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">200</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">210</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">225</div><div class="pct-weight-sub"></div></div></div><div class="warn"><b>Watch:</b> Right adductor: warm the hips, check stance before heavy. 235 was a ladder top (195/215/235), likely sub-maximal. A fresh 1RM test with Kevin is still worth scheduling.</div>
+  </div>
+  <div class="lift" style="--accent: #f59e0b;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #f59e0b;">Front Squat</div>
+        <div class="lift-tag">Est. 1RM · Jun 18, 2026</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">205</div>
+        <div class="lift-current-unit">lbs · est. 1RM</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">135 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">225 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">105</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">125</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">135</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">145</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">155</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">165</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">175</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">185</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">195</div><div class="pct-weight-sub"></div></div></div><div class="warn"><b>Watch:</b> Directional — estimated from a 185×3 top triple (6/18, clean). Treat the 90%+ cells as estimates until a programmed test.</div>
+  </div>
+  <div class="lift" style="--accent: #a855f7;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #a855f7;">Deadlift</div>
+        <div class="lift-tag">Tested single · Jun 30, 2026</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">275</div>
+        <div class="lift-current-unit">lbs · tested 1RM</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">135 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">295 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">140</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">165</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">180</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">195</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">205</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">220</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">235</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">250</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">260</div><div class="pct-weight-sub"></div></div></div><div class="warn"><b>Watch:</b> Feb strain long resolved, full rotation. 275×1 clean on 6/30 (top of a 90% ladder), so likely more in the tank. Formal max still open — goal bumped to 295.</div>
+  </div>
+  <div class="lift" style="--accent: #3b82f6;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #3b82f6;">Bench Press</div>
+        <div class="lift-tag">Tested 1RM · Mar 15, 2026</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">215</div>
+        <div class="lift-current-unit">lbs · tested 1RM</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">120 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">225 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">110</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">130</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">140</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">150</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">160</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">170</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">185</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">195</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">205</div><div class="pct-weight-sub"></div></div></div>
+  </div>
+  <div class="lift" style="--accent: #38bdf8;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #38bdf8;">Push Press</div>
+        <div class="lift-tag">5×5 @ 75% · Mar 24, 2026</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">115</div>
+        <div class="lift-current-unit">lbs · working max</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">85 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">135 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">60</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">70</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">75</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">80</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">85</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">90</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">100</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">105</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">110</div><div class="pct-weight-sub"></div></div></div>
+  </div>
+  <div class="lift" style="--accent: #22c55e;">
+    <div class="lift-head">
+      <div>
+        <div class="lift-name" style="color: #22c55e;">Seated Strict Press</div>
+        <div class="lift-tag">PR · Mar 3, 2026 · due for retest</div>
+      </div>
+      <div class="lift-current">
+        <div class="lift-current-num">95</div>
+        <div class="lift-current-unit">lbs · working max</div>
+      </div>
+    </div>
+    <div class="lift-meta">
+      <div class="meta-cell"><div class="meta-label">Started At</div><div class="meta-val">65 lbs</div></div>
+      <div class="meta-cell"><div class="meta-label">Aim For</div><div class="meta-val goal">115 lbs</div></div>
+    </div>
+    <div class="pct-grid"><div class="pct-cell warmup"><div class="pct-label">50%</div><div class="pct-weight">50</div><div class="pct-weight-sub"></div></div><div class="pct-cell warmup"><div class="pct-label">60%</div><div class="pct-weight">55</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">65%</div><div class="pct-weight">60</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">70%</div><div class="pct-weight">65</div><div class="pct-weight-sub"></div></div><div class="pct-cell working"><div class="pct-label">75%</div><div class="pct-weight">70</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">80%</div><div class="pct-weight">75</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">85%</div><div class="pct-weight">80</div><div class="pct-weight-sub"></div></div><div class="pct-cell heavy"><div class="pct-label">90%</div><div class="pct-weight">85</div><div class="pct-weight-sub"></div></div><div class="pct-cell max"><div class="pct-label">95%</div><div class="pct-weight">90</div><div class="pct-weight-sub"></div></div></div>
+  </div>
+  <div class="goals">
+    <div class="goals-title">🎯 Where You're Headed</div>
+    <div class="goal-row"><div class="goal-name">Back Squat</div><div class="goal-cur">235</div><div class="goal-arrow">→</div><div class="goal-target">275</div></div><div class="goal-row"><div class="goal-name">Front Squat</div><div class="goal-cur">205</div><div class="goal-arrow">→</div><div class="goal-target">225</div></div><div class="goal-row"><div class="goal-name">Deadlift</div><div class="goal-cur">275</div><div class="goal-arrow">→</div><div class="goal-target">295</div></div><div class="goal-row"><div class="goal-name">Bench Press</div><div class="goal-cur">215</div><div class="goal-arrow">→</div><div class="goal-target">225</div></div><div class="goal-row"><div class="goal-name">Push Press</div><div class="goal-cur">115</div><div class="goal-arrow">→</div><div class="goal-target">135</div></div><div class="goal-row"><div class="goal-name">Seated Strict Press</div><div class="goal-cur">95</div><div class="goal-arrow">→</div><div class="goal-target">115</div></div>
+    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--dim); line-height: 1.55;">
+      Targets at goal bodyweight (~170–180 lbs). Squat, front squat, and deadlift maxes are ladder/triple-derived, so a programmed test day with Kevin confirms the real numbers. Not a deadline, a destination.
+    </div>
+  </div>
+
+  <div class="footer">
+    TAYLORED FITNESS · KEVIN · ROSS · AUTO-UPDATED FROM prs.csv · JULY 15, 2026
+  </div>
+
+</body>
+</html>
