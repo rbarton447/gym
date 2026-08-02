@@ -1,0 +1,14 @@
+{
+  "name": "Gym Cheat Sheet",
+  "short_name": "Cheat Sheet",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#060e16",
+  "theme_color": "#060e16",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
