@@ -1,6 +1,6 @@
 // Gym Cheat Sheet offline cache
 // Bump CACHE on every rebuild so the phone picks up new numbers.
-const CACHE = 'gym-cheat-2026-08-3';
+const CACHE = 'gym-cheat-2026-08-06';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-180.png'];
 
 self.addEventListener('install', (e) => {
